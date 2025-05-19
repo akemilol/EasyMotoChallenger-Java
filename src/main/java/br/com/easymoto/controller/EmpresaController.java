@@ -1,8 +1,8 @@
 package br.com.easymoto.controller;
 
-import br.com.easymoto.dto.ClienteRequest;
-import br.com.easymoto.dto.ClienteResponse;
-import br.com.easymoto.service.ClienteService;
+import br.com.easymoto.dto.EmpresaRequest;
+import br.com.easymoto.dto.EmpresaResponse;
+import br.com.easymoto.service.EmpresaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,32 +11,32 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/api/empresas")
 @RequiredArgsConstructor
-@Tag(name = "Cliente", description = "Endpoints para gerenciamento de clientes")
-public class ClienteController {
+@Tag(name = "Empresa", description = "Endpoints para gerenciamento de empresas")
+public class EmpresaController {
 
-    private final ClienteService service;
+    private final EmpresaService service;
 
     @GetMapping
-    public Page<ClienteResponse> listar(
+    public Page<EmpresaResponse> listar(
             @RequestParam(required = false) String nome,
             Pageable pageable) {
         return service.listar(nome, pageable);
     }
 
     @GetMapping("/{id}")
-    public ClienteResponse buscarPorId(@PathVariable Long id) {
+    public EmpresaResponse buscarPorId(@PathVariable Long id) {
         return service.buscarPorId(id);
     }
 
     @PostMapping
-    public ClienteResponse salvar(@RequestBody @Valid ClienteRequest request) {
+    public EmpresaResponse salvar(@RequestBody @Valid EmpresaRequest request) {
         return service.salvar(request);
     }
 
     @PutMapping("/{id}")
-    public ClienteResponse atualizar(@PathVariable Long id, @RequestBody @Valid ClienteRequest request) {
+    public EmpresaResponse atualizar(@PathVariable Long id, @RequestBody @Valid EmpresaRequest request) {
         return service.atualizar(id, request);
     }
 
